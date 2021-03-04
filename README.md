@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# joki-presensi
+---
 
-## Getting Started
+## Ini apaan
 
-First, run the development server:
+`joki-presensi` adalah sebuah bot automasi absen untuk [presensi.its.ac.id](http://presensi.its.ac.id). Dibuat karena saya mager absen manual soalnya ribet terlalu banyak yang harus di klik.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How it works
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+`joki-presensi` memiliki server yang digunakan untuk melakukan [web-scrapping](https://www.dewaweb.com/blog/web-scraping-panduan-dan-teknik-tekniknya/). Teknik scrapping ini digunakan untuk menyimulasikan input yang dilakukan oleh user (mengisi form, meng-klik tombol, dsb)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Aman gak?
 
-## Learn More
+> "Wah ini scam buat ngumpulin email sama password akun kita"
 
-To learn more about Next.js, take a look at the following resources:
+project ini open-source brow, source code nya bisa diliat di github eug untuk [server](http://github.com/Syakhisk/joki-presensi-api) dan [front-end](http://github.com/Syakhisk/joki-presensi-site)nya. Di project ini juga gak ada database yang dipake buat storing apapun kecuali untuk tracking berapa kali kalian pake service ini.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Terus data yang kita input gimana?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Username dan password langsung digunakan untuk login ke form (gak disimpen server), dan kalo ke-save juga itu masuk ke cookies/cache browser masing-masing [(bisa dihapus)](https://www.google.com/search?q=clear+cookies+and+cache+browser). Kalo data kelas, disimpen di browser juga pake [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 
-## Deploy on Vercel
+---
+Project built with [next.js](https://nextjs.org/) hosted at [vercel](https://vercel.com) and [heroku](https://heroku.com) (server)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+## Contact me
+📧: mail.syakhisk@gmail.com

@@ -96,7 +96,7 @@ const Home = (props) => {
 							type='password'
 							label={
 								<div className='flex'>
-									<span className='flex-grow'>Kelas</span>
+									<span className='flex-grow'>Password myITS</span>
 									<Tooltip
 										fadeDuration={500}
 										className='bg-red-500'

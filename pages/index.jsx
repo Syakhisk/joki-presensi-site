@@ -94,7 +94,33 @@ const Home = (props) => {
 							required
 							id='password'
 							type='password'
-							label='Password myITS'
+							label={
+								<div className='flex'>
+									<span className='flex-grow'>Kelas</span>
+									<Tooltip
+										fadeDuration={500}
+										className='bg-red-500'
+										content={
+											<div className='text-xs whitespace-nowrap'>
+												<>
+													<span>Password is not stored, </span>
+													<Link href='/about#data' className='underline'>
+														<span role='button' className='underline'>
+															learn more
+														</span>
+													</Link>
+												</>
+											</div>
+										}>
+										<div className='relative'>
+											<span className='absolute right-0 w-5 h-5 border border-purple-400 rounded-full animate-ping'></span>
+											<span className='absolute right-0 w-5 h-5 text-xs text-center border-2 border-purple-400 rounded-full'>
+												?
+											</span>
+										</div>
+									</Tooltip>
+								</div>
+							}
 						/>
 						<div className='flex flex-col space-y-5 md:flex-row md:space-y-0 md:space-x-5'>
 							<FormGroup
@@ -102,7 +128,7 @@ const Home = (props) => {
 								setter={setKelas}
 								type='select'
 								label={
-									<div className='flex flex-row'>
+									<div className='flex'>
 										<span className='flex-grow'>Kelas</span>
 										<Tooltip
 											fadeDuration={500}

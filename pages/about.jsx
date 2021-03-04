@@ -58,7 +58,9 @@ function About() {
 					</Section>
 
 					<Section header='Aman gak?'>
-						<blockquote className='table p-3 my-2 text-gray-400 bg-gray-700 rounded-xl'>
+						<blockquote
+							id='aman'
+							className='table p-3 my-2 text-gray-400 bg-gray-700 rounded-xl'>
 							"Wah ini scam buat ngumpulin email sama password akun kita"
 						</blockquote>
 						<p>

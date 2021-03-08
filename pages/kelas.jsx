@@ -1,11 +1,12 @@
-import Layout from "../components/Layout";
 import Link from "next/link";
-import FormGroup from "../components/FormGroup";
 import { useEffect, useState } from "react";
-import today from "../lib/generate-data";
-import jsonKelas from "../lib/classes.json";
-import Loading from "../components/Loading";
 import { motion } from "framer-motion";
+
+import FormGroup from "../components/FormGroup";
+import Loading from "../components/Loading";
+import Layout from "../components/Layout";
+import jsonKelas from "../lib/classes.json";
+import today from "../lib/generate-data";
 
 const Kelas = (props) => {
 	const [nrp, setNrp] = useState("");
@@ -13,24 +14,35 @@ const Kelas = (props) => {
 	const [storedData, setStoredData] = useState("");
 	const [loading, setLoading] = useState(false);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
-		setInterval(() => {
-			window.localStorage.setItem("stored-data", JSON.stringify(jsonKelas));
-			setStoredData(jsonKelas);
-			setLoading(false);
-		}, 2000);
+
+		const body = {
+			nrp,
+			password,
+		};
+
+		const res = await fetch("/api/kelas", {
+			method: "POST",
+			body: JSON.stringify(body),
+			headers: { "Content-Type": "application/json" },
+		});
+		const data = await res.json();
+
+		window.localStorage.setItem("stored-data", JSON.stringify(data));
+		setStoredData(data);
+		setLoading(false);
 	};
 
 	const deleteLocalStorage = () => {
-		window.localStorage.removeItem("stored-kelas");
+		window.localStorage.removeItem("stored-data");
 		// setStoredData("");
 		// console.log("Done");
 	};
 
 	useEffect(() => {
-		setLoading(false);
+		// setLoading(false);
 		// let storedData = window.localStorage.getItem("stored-data");
 		// if (storedData) {
 		// 	setStoredData(JSON.parse(storedData));
@@ -44,24 +56,16 @@ const Kelas = (props) => {
 			{/* <button onClick={() => setLoading(!loading)}>Toggle Loading</button> */}
 			<Loading loading={loading} className='text-white' />
 			<div className='relative'>
-				<motion.i
-					layout
-					layoutId='topBar'
-					className='absolute w-1/4 h-4 bg-purple-500 rounded-full -top-7 -left-9'></motion.i>
-				<div>
-					{/* <Link href='/'>
-						<button className='text-sm text-purple-400 hover:text-purple-100'>
-							{"<"} go bacc
-						</button>
-					</Link> */}
+				<TopBar />
+				<>
 					<h1 className='text-xl text-center'>joki-presensi</h1>
-					<p className='text-xs px-5 text-center'>
+					<p className='px-5 text-xs text-center'>
 						Presensi ITS, versi simple.
 					</p>
 					<form
 						className='p-5 space-y-5 rounded'
 						onSubmit={(e) => handleSubmit(e)}>
-						<div className='flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3'>
+						<div className='flex flex-col space-y-3 md:flex-row md:space-y-0 md:space-x-3'>
 							<FormGroup
 								value={nrp}
 								setter={setNrp}
@@ -81,32 +85,20 @@ const Kelas = (props) => {
 						</div>
 
 						<div>
-							<span className='block text-sm text-purple-200 mb-3'>
+							<span className='block mb-3 text-sm text-purple-200'>
 								Data dari local storage:
 							</span>
-							<div className='bg-gray-800 w-full max-h-96 whitespace-nowrap rounded text-sm p-3 overflow-x-auto'>
-								{!storedData.kelas ? (
+							<div className='w-full p-3 overflow-x-auto text-sm bg-gray-800 rounded max-h-96 whitespace-nowrap'>
+								{!storedData.classes ? (
 									<h3>Belum ada kelas</h3>
 								) : (
-									<>
-										<ul className='list-decimal list-inside'>
-											{storedData.kelas.map((item, idx) => (
-												<li key={idx}>{item.title}</li>
-											))}
-										</ul>
-										<br />
-										<p>
-											Data ini milik <span>{storedData.nrp}</span>
-										</p>
-									</>
+									<KelasList storedData={storedData} />
 								)}
 							</div>
 						</div>
 
 						<div className='flex flex-col space-y-3'>
-							<button
-								type='submit'
-								className='px-3 py-3 text-white transition-all bg-purple-500 rounded bg-gradient-to-tl from-red-500 hover:from-purple-500 hover:bg-red-500'>
+							<button type='submit' className='btn-gradient'>
 								Ambil Data
 							</button>
 							<Link href='/'>
@@ -118,14 +110,45 @@ const Kelas = (props) => {
 							</Link>
 						</div>
 					</form>
-				</div>
-				<motion.i
-					layout
-					layoutId='botBar'
-					className='absolute w-3/5 h-4 bg-purple-500 rounded-full -bottom-7 -right-9'></motion.i>
+				</>
+				<BotBar />
 			</div>
 		</Layout>
 	);
 };
 
 export default Kelas;
+
+/* ---------------------------- local components ---------------------------- */
+
+const TopBar = () => (
+	<motion.i
+		// layout
+		layoutId='topBar'
+		className='bar w-1/4 h-4 -top-7 -left-9'
+	/>
+);
+
+const BotBar = () => (
+	<motion.i
+		// layout
+		layoutId='botBar'
+		className='bar w-3/5 h-4 -bottom-7 -right-9'
+	/>
+);
+
+const KelasList = ({ storedData }) => (
+	<>
+		<ul className='list-decimal list-inside'>
+			{storedData.classes.map((item, idx) => (
+				<li key={idx}>{item.title}</li>
+			))}
+		</ul>
+		<br />
+		<p>
+			Data ini milik <span>{storedData.name}</span>
+		</p>
+	</>
+);
+
+/* ----------------------------------- --- ---------------------------------- */

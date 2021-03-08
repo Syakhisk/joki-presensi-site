@@ -1,13 +1,9 @@
 import Head from "next/head";
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 export default function Layout(props) {
 	const { pageTitle = "joki-presensi", children } = props;
-	const router = useRouter();
-
-	const noSlash = (plain) => plain.slice(1, plain.length);
 
 	return (
 		<>
@@ -36,6 +32,8 @@ export default function Layout(props) {
 					</Link>
 				</nav>
 				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
 					layoutId='container'
 					layout
 					className='relative z-10 max-w-xs my-10 p-5 bg-gray-700 bg-opacity-30 md:max-w-xl lg:max-w-none rounded-xl'>

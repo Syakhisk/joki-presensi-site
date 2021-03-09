@@ -37,6 +37,8 @@ const Kelas = (props) => {
 
 		const data = await res.json();
 
+		console.log(data);
+
 		const errType = getErrorType(res.status);
 		if (errType == 2) {
 			const toastId = toast.success(

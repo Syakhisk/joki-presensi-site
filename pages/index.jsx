@@ -74,7 +74,6 @@ const Home = (props) => {
 
 	const deleteLocalStorage = () => {
 		let promise = new Promise((resolve, reject) => {
-			console.log("hapus");
 			window.localStorage.removeItem("stored-data");
 			setTimeout(() => {
 				setStoredData("");

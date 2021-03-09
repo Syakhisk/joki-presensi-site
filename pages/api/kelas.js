@@ -1,8 +1,9 @@
 const axios = require("axios");
 
+import { serverUrl } from "../../config";
+
 const http = axios.create({
-	// baseURL: "http://localhost:3001/v1",
-	baseURL: "https://jokipresensi-server.herokuapp.com/v1",
+	baseURL: `${serverUrl}/v1`,
 	headers: {
 		"Content-type": "application/json",
 	},

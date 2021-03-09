@@ -35,6 +35,9 @@ const Loading = ({ loading }) => {
 						<h6 className='w-full px-5 text-xs text-center animate-pulse'>
 							{loadMsg}
 						</h6>
+						<h6 className='text-xs text-gray-600'>
+							This loading can take from 15s-30s depending on your internet
+						</h6>
 					</div>
 				</motion.div>
 			)}

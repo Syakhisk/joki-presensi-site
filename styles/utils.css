@@ -1,14 +1,4 @@
 @layer utilities {
-	.btn {
-	}
-
-	.btn-gradient {
-		@apply px-3 py-3 text-white transition-all bg-purple-500 rounded bg-gradient-to-tl from-red-500 hover:from-purple-500 hover:bg-red-500;
-	}
-
-	.bar {
-		@apply absolute bg-purple-500 rounded w-4 h-4;
-	}
 
 	.circle-sm {
 		@apply absolute right-0 w-5 h-5 text-xs text-center border-2 border-purple-400 rounded-full;

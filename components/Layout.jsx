@@ -9,11 +9,11 @@ export default function Layout(props) {
 		<>
 			<Head>
 				<meta property='og:title' content='joki-presensi' />
-				<meta property='og:description' content='Presensi ITS, versi simple.' />
+				<meta property='og:description' content='Presensi ITS, simplified.' />
 				<meta property='twitter:title' content='joki-presensi' />
 				<meta
 					property='twitter:description'
-					content='Presensi ITS, versi simple.'
+					content='Presensi ITS, simplified.'
 				/>
 				<title>{pageTitle}</title>
 			</Head>
@@ -26,6 +26,12 @@ export default function Layout(props) {
 							joki-presensi
 						</span>
 					</Link>
+					<a
+						href='https://github.com/Syakhisk'
+						target='_blank'
+						className='text-gray-600 hover:text-gray-100 transition-all select-none'>
+						by mamank
+					</a>
 					<div className='flex-grow'></div>
 					<Link href='/about'>
 						<span role='button'>ini apaan si?</span>

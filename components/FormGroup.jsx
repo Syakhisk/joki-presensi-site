@@ -1,6 +1,7 @@
 const FormGroup = (props) => {
 	const {
 		id,
+		name = id,
 		value,
 		setter,
 		label,
@@ -20,11 +21,12 @@ const FormGroup = (props) => {
 
 			{type === "select" ? (
 				<select
-					className={`appearance-none ${className}`}
+					className={`appearance-none text-center ${className}`}
+					required={required}
 					id={id}
-					defaultValue={value}
+					// defaultValue={value}
 					onChange={(e) => setter(e.target.value)}
-					name={id}
+					name={name}
 					{...rest}>
 					{children}
 				</select>
@@ -35,7 +37,7 @@ const FormGroup = (props) => {
 					required={required}
 					className={className}
 					type={type}
-					name={id}
+					name={name}
 					id={id}
 					{...rest}
 				/>

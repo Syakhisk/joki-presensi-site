@@ -9,10 +9,14 @@ const http = axios.create({
 
 export default async function (req, res) {
 	if (req.method === "POST") {
-		const apires = await http.post("/kelas", req.body);
-
-		res.status(200).json(apires.data);
+		try {
+			const apires = await http.post("/kelas", req.body);
+			res.status(200).json(apires.data);
+		} catch (error) {
+			console.log(error);
+			res.status(400).json({ msg: error.response.data });
+		}
 	} else {
-		res.status(500);
+		res.status(400).json({ msg: "BAD REQUEST" });
 	}
 }

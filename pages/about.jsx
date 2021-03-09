@@ -67,6 +67,8 @@ function About() {
 							</LinkEl>
 						</p>
 					</Section>
+					{/* <div style={{ height: "2000px" }}></div>
+					<section id='meki'>meki geming on the way</section> */}
 				</div>
 				<BotBar />
 			</div>

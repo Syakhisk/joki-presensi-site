@@ -1,23 +1,19 @@
 import Head from "next/head";
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 export default function Layout(props) {
 	const { pageTitle = "joki-presensi", children } = props;
-	const router = useRouter();
-
-	const noSlash = (plain) => plain.slice(1, plain.length);
 
 	return (
 		<>
 			<Head>
 				<meta property='og:title' content='joki-presensi' />
-				<meta property='og:description' content='Presensi ITS, versi simple.' />
+				<meta property='og:description' content='Presensi ITS, simplified.' />
 				<meta property='twitter:title' content='joki-presensi' />
 				<meta
 					property='twitter:description'
-					content='Presensi ITS, versi simple.'
+					content='Presensi ITS, simplified.'
 				/>
 				<title>{pageTitle}</title>
 			</Head>
@@ -30,12 +26,20 @@ export default function Layout(props) {
 							joki-presensi
 						</span>
 					</Link>
+					<a
+						href='https://github.com/Syakhisk'
+						target='_blank'
+						className='text-gray-600 hover:text-gray-100 transition-all select-none'>
+						by mamank
+					</a>
 					<div className='flex-grow'></div>
 					<Link href='/about'>
 						<span role='button'>ini apaan si?</span>
 					</Link>
 				</nav>
 				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
 					layoutId='container'
 					layout
 					className='relative z-10 max-w-xs my-10 p-5 bg-gray-700 bg-opacity-30 md:max-w-xl lg:max-w-none rounded-xl'>

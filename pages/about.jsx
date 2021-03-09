@@ -2,34 +2,10 @@ import { motion } from "framer-motion";
 import Layout from "../components/Layout";
 
 function About() {
-	const Section = ({ header, children }) => {
-		return (
-			<section className='text-gray-300'>
-				<h2 className='text-gray-500'>{header}</h2>
-				{children}
-			</section>
-		);
-	};
-
-	const LinkEl = ({ href, children }) => {
-		return (
-			<a
-				href={href}
-				target='_blank'
-				rel='noopener noreferrer'
-				className='underline'>
-				{children}
-			</a>
-		);
-	};
-
 	return (
 		<Layout pageTitle='About'>
 			<div className='relative max-w-xl'>
-				<motion.i
-					layout
-					layoutId='topBar'
-					className='absolute w-4 h-4 bg-purple-500 rounded -top-7 -left-9'></motion.i>
+				<TopBar />
 				<h1 className='mb-5 text-2xl'>
 					About <code>joki-presensi</code>
 				</h1>
@@ -74,7 +50,7 @@ function About() {
 								front-end
 							</LinkEl>
 							nya. Di project ini juga gak ada database yang dipake buat storing
-							apapun kecuali untuk tracking berapa kali kalian pake service ini.
+							apapun kecuali untuk storing berapa kali kalian pake service ini.
 						</p>
 					</Section>
 					<Section header='Terus data yang kita input gimana?'>
@@ -91,14 +67,44 @@ function About() {
 							</LinkEl>
 						</p>
 					</Section>
+					{/* <div style={{ height: "2000px" }}></div>
+					<section id='meki'>meki geming on the way</section> */}
 				</div>
-				<motion.i
-					layout
-					layoutId='botBar'
-					className='absolute w-4 h-4 bg-purple-500 rounded -bottom-7 -right-9'></motion.i>
+				<BotBar />
 			</div>
 		</Layout>
 	);
 }
 
 export default About;
+
+/* --------------------------- local components -------------------------- */
+const TopBar = () => (
+	<motion.i layout layoutId='topBar' className='bar -top-7 -left-9' />
+);
+const BotBar = () => (
+	<motion.i layout layoutId='botBar' className='bar -bottom-7 -right-9' />
+);
+
+const Section = ({ header, children }) => {
+	return (
+		<section className='text-gray-300'>
+			<h2 className='text-gray-500'>{header}</h2>
+			{children}
+		</section>
+	);
+};
+
+const LinkEl = ({ href, children }) => {
+	return (
+		<a
+			href={href}
+			target='_blank'
+			rel='noopener noreferrer'
+			className='underline'>
+			{children}
+		</a>
+	);
+};
+
+/* ----------------------------------- --- ---------------------------------- */

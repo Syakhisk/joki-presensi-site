@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const http = axios.create({
-	baseURL: "http://localhost:3001/v1",
+	// baseURL: "http://localhost:3001/v1",
+	baseURL: "https://jokipresensi-server.herokuapp.com/v1",
 	headers: {
 		"Content-type": "application/json",
 	},

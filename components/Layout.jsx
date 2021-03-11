@@ -3,7 +3,16 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default function Layout(props) {
-	const { pageTitle = "joki-presensi", children } = props;
+	const { pageTitle = "joki-presensi", websocket, children } = props;
+
+	const send = () => {
+		console.log(websocket);
+		try {
+			websocket.send("Mamank");
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	return (
 		<>
@@ -18,18 +27,34 @@ export default function Layout(props) {
 				<title>{pageTitle}</title>
 			</Head>
 
+			{!websocket ? (
+				<motion.div className='flex justify-center w-full h-12 space-x-3 text-xs bg-red-500 place-items-center'>
+					<p>Connection failed to server</p>
+					<button
+						onClick={() => send()}
+						className='px-2 py-1 bg-red-600 rounded hover:bg-red-400'>
+						Reconnect
+					</button>
+				</motion.div>
+			) : (
+				<motion.div
+					layout
+					className='w-full py-1 text-xs text-center bg-green-400 overflow-hidden'>
+					<span>Status: </span> <span>Connected</span>
+				</motion.div>
+			)}
 			<main className='relative grid w-full p-5 place-items-center'>
-				<nav className='text-purple-400 w-full flex text-sm'>
+				<nav className='flex w-full text-sm text-purple-400'>
 					<Link href='/'>
 						<span role='button'>
-							<span className='text-gray-500 mx-1'>/</span>
+							<span className='mx-1 text-gray-500'>/</span>
 							joki-presensi
 						</span>
 					</Link>
 					<a
 						href='https://github.com/Syakhisk'
 						target='_blank'
-						className='text-gray-600 hover:text-gray-100 transition-all select-none'>
+						className='text-gray-600 transition-all select-none hover:text-gray-100'>
 						by mamank
 					</a>
 					<div className='flex-grow'></div>
@@ -42,7 +67,10 @@ export default function Layout(props) {
 					animate={{ opacity: 1 }}
 					layoutId='container'
 					layout
-					className='relative z-10 max-w-xs my-10 p-5 bg-gray-700 bg-opacity-30 md:max-w-xl lg:max-w-none rounded-xl'>
+					className='relative z-10 max-w-xs p-5 my-10 bg-gray-700 bg-opacity-30 md:max-w-xl lg:max-w-none rounded-xl'>
+					{/* <div className='flex justify-center w-full'>
+						<div className='w-6 h-2 bg-green-400 rounded-full'></div>
+					</div> */}
 					{children}
 				</motion.div>
 			</main>

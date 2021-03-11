@@ -22,6 +22,8 @@ const Home = (props) => {
 	const [storedData, setStoredData] = useState("");
 	const [loading, setLoading] = useState(false);
 
+	const { websocket } = props;
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -35,33 +37,35 @@ const Home = (props) => {
 			selectedClass: classs,
 		};
 
-		const res = await fetch("/api/presensi", {
-			method: "POST",
-			body: JSON.stringify(body),
-			headers: { "Content-Type": "application/json" },
-		});
+		websocket.send(JSON.stringify({ type: "hadir", body }));
 
-		const data = await res.json();
-		setLoading(false);
+		// const res = await fetch("/api/presensi", {
+		// 	method: "POST",
+		// 	body: JSON.stringify(body),
+		// 	headers: { "Content-Type": "application/json" },
+		// });
 
-		const errType = getErrorType(res.status);
-		if (errType == 2) {
-			const toastId = toast.success(
-				<div className='flex'>
-					<span>{data.msg}</span>
-					<DismissToast id={toastId} />
-				</div>,
-				{ duration: 999999 }
-			);
-		} else {
-			const toastId = toast.error(
-				<div className='flex'>
-					<span>{data.msg}</span>
-					<DismissToast id={toastId} />
-				</div>,
-				{ duration: 999999 }
-			);
-		}
+		// const data = await res.json();
+		// setLoading(false);
+
+		// const errType = getErrorType(res.status);
+		// if (errType == 2) {
+		// 	const toastId = toast.success(
+		// 		<div className='flex'>
+		// 			<span>{data.msg}</span>
+		// 			<DismissToast id={toastId} />
+		// 		</div>,
+		// 		{ duration: 999999 }
+		// 	);
+		// } else {
+		// 	const toastId = toast.error(
+		// 		<div className='flex'>
+		// 			<span>{data.msg}</span>
+		// 			<DismissToast id={toastId} />
+		// 		</div>,
+		// 		{ duration: 999999 }
+		// 	);
+		// }
 
 		// if(data.)
 
@@ -107,8 +111,12 @@ const Home = (props) => {
 	return (
 		<>
 			<Toaster toastOptions={toastStyling} />
-			<Layout>
-				<Loading loading={loading} className='text-white' />
+			<Layout websocket={props.websocket}>
+				<Loading
+					loading={loading}
+					websocket={props.websocket}
+					className='text-white'
+				/>
 				<div className='relative max-w-xl'>
 					<TopBar />
 					<div>
